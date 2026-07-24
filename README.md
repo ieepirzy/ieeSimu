@@ -61,8 +61,8 @@ Generates a random plane through three random points in 3D and visualizes it as 
 **Model:**
 
 - Three random points P0, P1, P2 sampled with integer coordinates in [1, 10)
-- Plane normal computed via the cross product of edge vectors (P1−P0) × (P2−P0)
-- Surface plotted over a grid by solving the plane equation for Z (or a flat Z=0 plane if the normal has no Z-component)
+- Edge vectors v1 = P1−P0, v2 = P2−P0 span the plane
+- Surface plotted parametrically as P0 + s·v1 + t·v2 over a grid of (s, t), which handles vertical planes correctly (unlike solving the plane equation for Z)
 
 **Output:** Interactive 3D matplotlib plot showing the plane surface and the three defining points.
 

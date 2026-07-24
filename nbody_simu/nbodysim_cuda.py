@@ -34,7 +34,7 @@ def update_forces(bodies):
     forces = cp.zeros((n,2), dtype=cp.float64)
 
     # compute all pairwise forces
-    r_vec = pos[:,None,:] - pos[None,:,:]  # shape (n,n,2)
+    r_vec = pos[None,:,:] - pos[:,None,:]  # shape (n,n,2), points from i toward j
     dist = cp.linalg.norm(r_vec, axis=2) + eps
     cp.fill_diagonal(dist, 1.0)  # avoid self-force division
     F_mag = gamma * mass * mass.T / (dist**2)

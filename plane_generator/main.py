@@ -13,24 +13,15 @@ P2 = np.random.randint(1, 10, size=3)
 v1 = P1-P0
 v2 = P2-P0
 
-n = np.cross(v1,v2)
+# Parameterize the plane directly from its spanning vectors (point = P0 + s*v1 + t*v2)
+# rather than solving for Z given X,Y, since that breaks down for vertical planes.
+s = np.linspace(-10, 10, 20)
+t = np.linspace(-10, 10, 20)
+S, T = np.meshgrid(s, t)
 
-A, B, C = n
-
-D = np.dot(n, P0)
-
-X = np.linspace(-200,200)
-Y = np.linspace(-200,200)
-Z = np.linspace(-200,200)
-
-x = np.linspace(-10, 10, 20)
-y = np.linspace(-10, 10, 20)
-X, Y = np.meshgrid(x, y)
-
-if C != 0:
-    Z = (D - A*X - B*Y) / C
-else:
-    Z = np.zeros_like(X)
+X = P0[0] + S*v1[0] + T*v2[0]
+Y = P0[1] + S*v1[1] + T*v2[1]
+Z = P0[2] + S*v1[2] + T*v2[2]
 
 
 # --- plotting ---
